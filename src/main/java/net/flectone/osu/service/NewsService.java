@@ -1,5 +1,6 @@
 package net.flectone.osu.service;
 
+import lombok.AllArgsConstructor;
 import net.flectone.osu.model.News;
 import net.flectone.osu.model.User;
 import net.flectone.osu.repository.NewsRepository;
@@ -14,16 +15,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class NewsService {
 
     private final UserRepository userRepository;
     private final NewsRepository newsRepository;
-
-    public NewsService(UserRepository userRepository,
-                       NewsRepository newsRepository) {
-        this.userRepository = userRepository;
-        this.newsRepository = newsRepository;
-    }
 
     public List<News> getAllNews() {
         return newsRepository.findAll();

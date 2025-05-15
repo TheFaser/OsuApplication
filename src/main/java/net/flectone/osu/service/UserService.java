@@ -1,6 +1,7 @@
 package net.flectone.osu.service;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import net.flectone.osu.model.User;
 import net.flectone.osu.repository.UserRepository;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,15 +13,11 @@ import java.util.List;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Логин</title>
+    <title>Авторизация</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -17,7 +17,7 @@
         </form>
     </th:block>
     <th:block th:unless="${#authentication.principal} != 'anonymousUser'">
-        <a th:href="@{/login}">Логин</a>
+        <a th:href="@{/login}">Авторизация</a>
         <a th:href="@{/register}">Регистрация</a>
     </th:block>
 </nav>
@@ -46,7 +46,7 @@
             <input type="password" name="password" required>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Войти</button>
     </form>
 </div>
 </body>

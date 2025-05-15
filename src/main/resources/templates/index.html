@@ -17,7 +17,7 @@
         </form>
     </th:block>
     <th:block th:unless="${#authentication.principal} != 'anonymousUser'">
-        <a th:href="@{/login}">Логин</a>
+        <a th:href="@{/login}">Авторизация</a>
         <a th:href="@{/register}">Регистрация</a>
     </th:block>
 </nav>

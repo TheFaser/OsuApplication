@@ -1,5 +1,6 @@
 package net.flectone.osu.controller;
 
+import lombok.AllArgsConstructor;
 import net.flectone.osu.model.News;
 import net.flectone.osu.service.NewsService;
 import org.springframework.http.HttpStatus;
@@ -10,13 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/news")
+@AllArgsConstructor
 public class NewsController {
 
     private final NewsService newsService;
-
-    public NewsController(NewsService newsService) {
-        this.newsService = newsService;
-    }
 
     @GetMapping
     public List<News> getAllNews() {

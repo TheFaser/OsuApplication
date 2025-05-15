@@ -1,5 +1,6 @@
 package net.flectone.osu.controller;
 
+import lombok.AllArgsConstructor;
 import net.flectone.osu.model.User;
 import net.flectone.osu.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -8,12 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping
     public List<User> getAllUsers() {

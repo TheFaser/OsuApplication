@@ -1,6 +1,7 @@
 package net.flectone.osu.controller;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import net.flectone.osu.model.News;
 import net.flectone.osu.model.User;
 import net.flectone.osu.repository.UserRepository;
@@ -18,19 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.nio.file.AccessDeniedException;
 
 @Controller
+@AllArgsConstructor
 public class WebController {
 
     private final UserService userService;
     private final NewsService newsService;
     private final UserRepository userRepository;
-
-    public WebController(UserService userService,
-                         NewsService newsService,
-                         UserRepository userRepository) {
-        this.userService = userService;
-        this.newsService = newsService;
-        this.userRepository = userRepository;
-    }
 
     @GetMapping("/")
     public String index(Model model) {

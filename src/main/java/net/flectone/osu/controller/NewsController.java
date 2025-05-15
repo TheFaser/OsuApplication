@@ -3,7 +3,6 @@ package net.flectone.osu.controller;
 import net.flectone.osu.model.News;
 import net.flectone.osu.service.NewsService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.AccessDeniedException;
@@ -25,19 +24,18 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<News> createNews(@RequestBody News news) {
-        News createdNews = newsService.createNews(news);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdNews);
+    @ResponseStatus(HttpStatus.CREATED)
+    public News createNews(@RequestBody News news) {
+        return newsService.createNews(news);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteNews(@PathVariable Long id) throws AccessDeniedException {
+    public void deleteNews(@PathVariable Long id) throws AccessDeniedException {
         newsService.deleteNews(id);
-        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<News> updateNews(@PathVariable Long id, @RequestBody News news) throws AccessDeniedException {
-        return ResponseEntity.ok(newsService.updateNews(id, news));
+    public News updateNews(@PathVariable Long id, @RequestBody News news) throws AccessDeniedException {
+        return newsService.updateNews(id, news);
     }
 }

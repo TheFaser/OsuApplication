@@ -59,7 +59,7 @@ public class WebController {
             redirectAttributes.addAttribute("registered", true);
             return "redirect:/login";
         } catch (DataIntegrityViolationException e) {
-            model.addAttribute("error", "Email уже существует");
+            model.addAttribute("error", "Почта уже существует");
             return "register";
         }
     }

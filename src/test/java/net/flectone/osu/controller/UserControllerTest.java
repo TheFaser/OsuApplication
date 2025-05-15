@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
+@ActiveProfiles("test")
 public class UserControllerTest {
 
     @Autowired
@@ -32,7 +34,7 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @WithMockUser(roles = "ADMIN") // Добавляем права администратора
+    @WithMockUser(roles = "ADMIN")
     void getAllUsers() throws Exception {
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
@@ -55,13 +57,13 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "test@example.com") // Указываем конкретного пользователя
+    @WithMockUser(username = "test@example.com")
     void updateUser() throws Exception {
         User user = userRepository.save(createTestUser());
         user.setFirstName("Updated");
 
         mockMvc.perform(put("/api/users/" + user.getId())
-                        .with(csrf()) // Добавляем CSRF токен
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk())

@@ -138,7 +138,7 @@ public class WebController {
     ) {
         try {
             userService.changePassword(oldPassword, newPassword);
-            redirectAttributes.addFlashAttribute("success", "Password changed successfully");
+            redirectAttributes.addFlashAttribute("success", "Пароль успешно изменён!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }

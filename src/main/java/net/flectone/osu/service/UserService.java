@@ -28,7 +28,7 @@ public class UserService {
 
     public User createUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new DataIntegrityViolationException("Email already exists");
+            throw new DataIntegrityViolationException("Такая почта уже существует");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -52,7 +52,7 @@ public class UserService {
         User user = userRepository.findByEmail(auth.getName()).orElseThrow();
 
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Invalid old password");
+            throw new IllegalArgumentException("Неправильный старый пароль");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));

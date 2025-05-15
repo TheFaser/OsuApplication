@@ -33,7 +33,7 @@ public class NewsService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
         news.setUser(user);
         news.setCreatedDate(LocalDateTime.now());
@@ -45,7 +45,7 @@ public class NewsService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!news.getUser().getEmail().equals(auth.getName())) {
-            throw new AccessDeniedException("You can't delete this news");
+            throw new AccessDeniedException("Ты не можешь удалить эту новость");
         }
 
         newsRepository.delete(news);
@@ -56,7 +56,7 @@ public class NewsService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!news.getUser().getEmail().equals(auth.getName())) {
-            throw new AccessDeniedException("You can't edit this news");
+            throw new AccessDeniedException("Ты не можешь изменять эту новость");
         }
 
         news.setTitle(updatedNews.getTitle());
@@ -66,11 +66,11 @@ public class NewsService {
 
     public News getNewsById(Long id) throws AccessDeniedException {
         News news = newsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("News not found"));
+                .orElseThrow(() -> new RuntimeException("Новость не найдена"));
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!news.getUser().getEmail().equals(auth.getName())) {
-            throw new AccessDeniedException("Access denied");
+            throw new AccessDeniedException("Доступ запрещён");
         }
 
         return news;

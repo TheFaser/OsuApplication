@@ -27,18 +27,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is required")
+    @NotBlank(message = "Имя обязательно")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @NotBlank(message = "Фамилия обязательна")
     private String lastName;
 
-    @Email(message = "Invalid email format")
-    @NotBlank(message = "Email is required")
+    @Email(message = "Неправильный формат почты")
+    @NotBlank(message = "Почта обязательна")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "Пароль обязателен")
     private String password;
 
     @JsonIgnore
